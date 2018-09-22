@@ -1,14 +1,11 @@
 # WatcthTy
 
-SCam
-Scam is an application that allows you to take photos from the camera of your device.
+WatcthTy is an application that allows you to follow the novelties of the movie.
 
-The following functions which are implemented in the application:
+What you can find in the application:
 
-possibility to take a photo from the camera of the device;
-slide menu with displaying of all taken photos;
-removing photos;
-viewing photos;
-the ability to share photos;
-Core Data.
-All functionality and design will be modified and changed from time to time.
+- information about the films that are now playing;
+- see information about popular films;
+- check which movies are in the top;
+- find out what movies will be released soon;
+- using the search to find your favorite movie.
