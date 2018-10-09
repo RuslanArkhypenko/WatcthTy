@@ -26,7 +26,6 @@
 @property (assign, nonatomic) int page;
 @property (assign, nonatomic) BOOL isEditing;
 @property (strong, nonatomic) NSString* urlString;
-@property (strong, nonatomic) NSString* errorStr;
 
 @end
 
@@ -41,17 +40,40 @@ NSString* const upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?a
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Background"]];
+
     self.movieArray = [NSMutableArray array];
     [self configureMenuItem];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.backgroundColor = [UIColor clearColor];
     [self.refreshControl addTarget:self action:@selector(refreshAction:) forControlEvents:UIControlEventValueChanged];
-    [self.collectionView insertSubview:self.refreshControl atIndex:0];
+    [self.collectionView addSubview:self.refreshControl];
     self.page = 1;
     
     [self setChoosenCategory];
 }
+
+//- (void)showErrorView {
+//    
+//    UIView* errorView = [[UIView alloc] initWithFrame:CGRectMake(0, -50, self.view.frame.size.width, 50)];
+//    errorView.backgroundColor = [UIColor redColor];
+//    
+//    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+//    label.text = @"NO INTERNET CONNECTION";
+//    label.textAlignment = NSTextAlignmentCenter;
+//    [errorView addSubview:label];
+//    
+//    [self.view addSubview:errorView];
+//    
+//    [UIView animateWithDuration:1 animations:^{
+//        errorView.frame = CGRectMake(0, 0, self.view.frame.size.width, 50);
+//    }];
+//    
+//
+//    
+//    
+//}
 
 #pragma mark - UICollectionViewDataSource
 
@@ -62,31 +84,31 @@ NSString* const upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?a
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-        MovieCollectionViewCell* cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"MovieCell" forIndexPath:indexPath];
+    MovieCollectionViewCell* cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"MovieCell" forIndexPath:indexPath];
         
-        Movie* movie = [self.movieArray objectAtIndex:indexPath.row];
+    Movie* movie = [self.movieArray objectAtIndex:indexPath.row];
         
-        cell.titleLabel.text = [NSString stringWithFormat:@"%@", movie.title];
-        cell.voteCountLabel.text = [NSString stringWithFormat:@"%i", (int)movie.voteCount];
-        cell.voteAverageLabel.text = [NSString stringWithFormat:@"%.1f", movie.voteAverage];
-        cell.aboveView.layer.cornerRadius = 15;
+    cell.titleLabel.text = [NSString stringWithFormat:@"%@", movie.title];
+    cell.voteCountLabel.text = [NSString stringWithFormat:@"%i", (int)movie.voteCount];
+    cell.voteAverageLabel.text = [NSString stringWithFormat:@"%.1f", movie.voteAverage];
+    cell.aboveView.layer.cornerRadius = 15;
         
-        NSURLRequest* posterPathRequest = [NSURLRequest requestWithURL:movie.posterPath];
+    NSURLRequest* posterPathRequest = [NSURLRequest requestWithURL:movie.posterPath];
         
-        [cell.posterImageView
-         setImageWithURLRequest:posterPathRequest
-         placeholderImage:nil
-         success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+    [cell.posterImageView
+    setImageWithURLRequest:posterPathRequest
+    placeholderImage:nil
+    success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+    
+        cell.posterImageView.image = image;
+        movie.posterImage = image;
+    }
+    failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        NSLog(@"error = %@", [error localizedDescription]);
              
-             cell.posterImageView.image = image;
-             movie.posterImage = image;
-         }
-         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-             NSLog(@"error = %@", [error localizedDescription]);
-             
-         }];
+    }];
         
-        return cell;
+    return cell;
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -176,9 +198,6 @@ NSString* const upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?a
         
     } onFailure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"ERROR: %@", [error localizedDescription]);
-        self.errorStr = [error localizedDescription];
-        
-        [self.collectionView reloadData];
     }];
 }
 
