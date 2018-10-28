@@ -13,7 +13,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *voteAverageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *voteCountLabel;
-@property (weak, nonatomic) IBOutlet UIView *aboveView;
-@property (weak, nonatomic) IBOutlet UIButton *checkMarkButton;
 
 @end

@@ -166,7 +166,8 @@
 				B17E2B12211DED5F00463600 /* LaunchScreen.storyboard */,
 				B17E2B15211DED5F00463600 /* Info.plist */,
 				B17E2B16211DED5F00463600 /* main.m */,
-				B17E2B482120807F00463600 /* View */,
+				B17E2B4A2120809700463600 /* CustomCells */,
+				B17E2B492120808C00463600 /* Controllers */,
 				B17E2B4C212080B800463600 /* Managers */,
 				B17E2B4B212080AC00463600 /* Model */,
 			);
@@ -189,15 +190,6 @@
 				B17E2B2D211DED6000463600 /* Info.plist */,
 			);
 			path = WatcthTyUITests;
-			sourceTree = "<group>";
-		};
-		B17E2B482120807F00463600 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				B17E2B492120808C00463600 /* Controllers */,
-				B17E2B4A2120809700463600 /* CustomCells */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		B17E2B492120808C00463600 /* Controllers */ = {

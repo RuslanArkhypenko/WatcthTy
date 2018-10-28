@@ -54,27 +54,6 @@ NSString* const upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?a
     [self setChoosenCategory];
 }
 
-//- (void)showErrorView {
-//    
-//    UIView* errorView = [[UIView alloc] initWithFrame:CGRectMake(0, -50, self.view.frame.size.width, 50)];
-//    errorView.backgroundColor = [UIColor redColor];
-//    
-//    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
-//    label.text = @"NO INTERNET CONNECTION";
-//    label.textAlignment = NSTextAlignmentCenter;
-//    [errorView addSubview:label];
-//    
-//    [self.view addSubview:errorView];
-//    
-//    [UIView animateWithDuration:1 animations:^{
-//        errorView.frame = CGRectMake(0, 0, self.view.frame.size.width, 50);
-//    }];
-//    
-//
-//    
-//    
-//}
-
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -91,7 +70,6 @@ NSString* const upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?a
     cell.titleLabel.text = [NSString stringWithFormat:@"%@", movie.title];
     cell.voteCountLabel.text = [NSString stringWithFormat:@"%i", (int)movie.voteCount];
     cell.voteAverageLabel.text = [NSString stringWithFormat:@"%.1f", movie.voteAverage];
-    cell.aboveView.layer.cornerRadius = 15;
         
     NSURLRequest* posterPathRequest = [NSURLRequest requestWithURL:movie.posterPath];
         
@@ -120,6 +98,11 @@ NSString* const upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?a
         NSString* requestStr = [NSString stringWithFormat:@"%@&page=%i", self.urlString, self.page];
         [self getDataFromServerFromServer:requestStr];
     }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
