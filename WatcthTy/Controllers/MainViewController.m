@@ -215,6 +215,7 @@ NSString* const upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?a
    
         case MovieCategorySearch: {
             [self setSearchBar];
+            [self.searchBar becomeFirstResponder];
             break;}
     }
 }
@@ -232,6 +233,7 @@ NSString* const upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?a
 
     UIView *wrapView = [[UIView alloc] initWithFrame:self.searchBar.frame];
     self.searchBar.delegate = self;
+    self.searchBar.keyboardAppearance = UIKeyboardAppearanceDark;
     [wrapView addSubview:self.searchBar];
     self.navigationItem.titleView = wrapView;
 }
