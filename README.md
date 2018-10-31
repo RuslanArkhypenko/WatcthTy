@@ -1,6 +1,6 @@
-# WatcthTy
+# WatchTy
 
-WatcthTy is an application that allows you to follow the novelties of the movie.
+WatchTy is an application that allows you to follow the novelties of the movie.
 
 What you can find in the application:
 
