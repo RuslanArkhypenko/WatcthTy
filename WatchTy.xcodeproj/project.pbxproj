@@ -24,6 +24,9 @@
 		B17E2B41211DFD4F00463600 /* ServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B17E2B40211DFD4F00463600 /* ServerManager.m */; };
 		B17E2B44211E01CE00463600 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = B17E2B43211E01CE00463600 /* Movie.m */; };
 		B17E2B4F212080EF00463600 /* CertainMovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B17E2B4E212080EF00463600 /* CertainMovieViewController.m */; };
+		B1E806FB2194A65C00AD2F91 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E806FA2194A65C00AD2F91 /* Reachability.m */; };
+		B1E807052194D88A00AD2F91 /* NoConnectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E807042194D88A00AD2F91 /* NoConnectionView.m */; };
+		B1E807072194D89D00AD2F91 /* NoConnectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1E807062194D89D00AD2F91 /* NoConnectionView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +81,11 @@
 		B17E2B43211E01CE00463600 /* Movie.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
 		B17E2B4D212080EF00463600 /* CertainMovieViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertainMovieViewController.h; sourceTree = "<group>"; };
 		B17E2B4E212080EF00463600 /* CertainMovieViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertainMovieViewController.m; sourceTree = "<group>"; };
+		B1E806F92194A65C00AD2F91 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		B1E806FA2194A65C00AD2F91 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		B1E807032194D88A00AD2F91 /* NoConnectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoConnectionView.h; sourceTree = "<group>"; };
+		B1E807042194D88A00AD2F91 /* NoConnectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoConnectionView.m; sourceTree = "<group>"; };
+		B1E807062194D89D00AD2F91 /* NoConnectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoConnectionView.xib; sourceTree = "<group>"; };
 		B67DDE097FCE11ACF66CCB8C /* libPods-WatcthTy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WatcthTy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4B9D6E8649DB9ABAFAE1405 /* Pods-WatcthTyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatcthTyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WatcthTyUITests/Pods-WatcthTyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D6DC4127F0CBC552BBF17927 /* Pods-WatcthTyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatcthTyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WatcthTyTests/Pods-WatcthTyTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -166,6 +174,8 @@
 				B17E2B12211DED5F00463600 /* LaunchScreen.storyboard */,
 				B17E2B15211DED5F00463600 /* Info.plist */,
 				B17E2B16211DED5F00463600 /* main.m */,
+				B1E807022194C05900AD2F91 /* CustomView */,
+				B1E806FC2194A6D300AD2F91 /* Reachability */,
 				B17E2B4A2120809700463600 /* CustomCells */,
 				B17E2B492120808C00463600 /* Controllers */,
 				B17E2B4C212080B800463600 /* Managers */,
@@ -232,6 +242,25 @@
 				B17E2B40211DFD4F00463600 /* ServerManager.m */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		B1E806FC2194A6D300AD2F91 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				B1E806F92194A65C00AD2F91 /* Reachability.h */,
+				B1E806FA2194A65C00AD2F91 /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
+		B1E807022194C05900AD2F91 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				B1E807032194D88A00AD2F91 /* NoConnectionView.h */,
+				B1E807042194D88A00AD2F91 /* NoConnectionView.m */,
+				B1E807062194D89D00AD2F91 /* NoConnectionView.xib */,
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,6 +370,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B17E2B14211DED5F00463600 /* LaunchScreen.storyboard in Resources */,
+				B1E807072194D89D00AD2F91 /* NoConnectionView.xib in Resources */,
 				B17E2B11211DED5F00463600 /* Assets.xcassets in Resources */,
 				B17E2B0F211DED5E00463600 /* Main.storyboard in Resources */,
 			);
@@ -428,7 +458,9 @@
 				B17E2B41211DFD4F00463600 /* ServerManager.m in Sources */,
 				B17E2B17211DED5F00463600 /* main.m in Sources */,
 				B122602E212D5E4A005E4DD8 /* SWRevealViewController.m in Sources */,
+				B1E806FB2194A65C00AD2F91 /* Reachability.m in Sources */,
 				B17E2B3B211DF9CB00463600 /* MainViewController.m in Sources */,
+				B1E807052194D88A00AD2F91 /* NoConnectionView.m in Sources */,
 				B17E2B4F212080EF00463600 /* CertainMovieViewController.m in Sources */,
 				B17E2B3E211DFA6A00463600 /* MovieCollectionViewCell.m in Sources */,
 				B1226031212D70A4005E4DD8 /* MenuTableViewController.m in Sources */,

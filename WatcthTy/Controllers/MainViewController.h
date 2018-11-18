@@ -8,18 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum {
-    MovieCategoryNowPlaying,
-    MovieCategoryPopular,
-    MovieCategoryTopRated,
-    MovieCategoryUpcoming,
-    MovieCategorySearch
-    
-} MovieCategory;
-
-
 @interface MainViewController : UIViewController
 
-@property (assign, nonatomic) MovieCategory category;
+@property (assign, nonatomic) NSInteger category;
 
 @end

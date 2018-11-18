@@ -14,7 +14,7 @@
 
 + (ServerManager *) sharedManager {
     
-    static ServerManager* manager = nil;
+    static ServerManager *manager = nil;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -24,21 +24,21 @@
     return manager;
 }
 
-- (void) getMoviesWithURL:(NSString*)urlStr OnSuccess:(void(^)(NSArray* movies)) success
-                 onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
+- (void) getMoviesWithURL:(NSString *)urlStr OnSuccess:(void(^)(NSArray *movies)) success
+                 onFailure:(void(^)(NSError *error, NSInteger statusCode)) failure {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       // NSLog(@"JSON: %@", responseObject);
+        //NSLog(@"JSON: %@", responseObject);
         
         NSLog(@"SERVER ::::::::::%@", urlStr);
         
-        NSArray* JSONArray = [responseObject objectForKey:@"results"];
-        NSMutableArray* objectsArray = [NSMutableArray array];
+        NSArray *JSONArray = [responseObject objectForKey:@"results"];
+        NSMutableArray *objectsArray = [NSMutableArray array];
         
-        for (NSDictionary* dict in JSONArray) {
+        for (NSDictionary *dict in JSONArray) {
 
-            Movie* movie = [[Movie alloc] initWithServerResponse:dict];
+            Movie *movie = [[Movie alloc] initWithServerResponse:dict];
             [objectsArray addObject:movie];
         }
 

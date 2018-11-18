@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString *const DataLanguageDidChangedNotification;
+extern NSString *const DataLanguageUserInfoKey;
+
 @interface MenuTableViewController : UITableViewController
 
 @end

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8gy-YM-2FX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8gy-YM-2FX">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -147,6 +147,7 @@
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="uUu-SU-Rfk"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="wxV-LC-5uK"/>
+                                    <outlet property="dragDelegate" destination="BYZ-38-t0r" id="0cb-tD-dLA"/>
                                 </connections>
                             </collectionView>
                         </subviews>
@@ -167,15 +168,12 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="Title"/>
-                            <connections>
-                                <action selector="watchtyAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N3L-lu-jz5"/>
-                            </connections>
                         </button>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="9iF-2c-EyM" id="mis-fm-7oR"/>
                         <outlet property="menuItem" destination="85Q-D3-FxH" id="HTP-59-Y8G"/>
-                        <outlet property="watchtyButton" destination="tqc-It-SIP" id="3KP-vZ-wO6"/>
+                        <outlet property="watchtyButton" destination="tqc-It-SIP" id="eRc-yE-he0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -610,17 +608,61 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <segue destination="mH7-wb-YPi" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="Y5A-M6-WJL"/>
+                                            <segue destination="mH7-wb-YPi" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="sCI-W6-Tar"/>
                                         </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="c1p-6f-6x0">
+                                        <rect key="frame" x="0.0" y="345" width="320" height="52"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="c1p-6f-6x0" id="bjY-8G-bAF">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGD-Xs-V7Z">
+                                                    <rect key="frame" x="54" y="14" width="87" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="language" translatesAutoresizingMaskIntoConstraints="NO" id="OPz-Cs-0f8">
+                                                    <rect key="frame" x="16" y="10" width="30" height="30"/>
+                                                </imageView>
+                                                <pickerView contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="koJ-Fo-QUd">
+                                                    <rect key="frame" x="149" y="-17" width="111" height="85.5"/>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="ET8-Sk-iZf" id="3Vb-Xc-gqH"/>
+                                                        <outlet property="delegate" destination="ET8-Sk-iZf" id="Uhk-2w-IQ6"/>
+                                                    </connections>
+                                                </pickerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="OPz-Cs-0f8" secondAttribute="bottom" constant="11.5" id="1jg-bj-PWt"/>
+                                                <constraint firstAttribute="trailing" secondItem="koJ-Fo-QUd" secondAttribute="trailing" constant="60" id="AKK-xs-b2d"/>
+                                                <constraint firstItem="oGD-Xs-V7Z" firstAttribute="centerY" secondItem="OPz-Cs-0f8" secondAttribute="centerY" id="IQd-2P-oi5"/>
+                                                <constraint firstItem="oGD-Xs-V7Z" firstAttribute="leading" secondItem="OPz-Cs-0f8" secondAttribute="trailing" constant="8" id="Jfn-nY-eNj"/>
+                                                <constraint firstAttribute="bottom" secondItem="koJ-Fo-QUd" secondAttribute="bottom" constant="-17" id="O97-T2-ZUy"/>
+                                                <constraint firstItem="OPz-Cs-0f8" firstAttribute="leading" secondItem="bjY-8G-bAF" secondAttribute="leading" constant="16" id="Ru0-ro-g5y"/>
+                                                <constraint firstItem="koJ-Fo-QUd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oGD-Xs-V7Z" secondAttribute="trailing" constant="8" symbolic="YES" id="Y6w-0Z-tfc"/>
+                                                <constraint firstItem="OPz-Cs-0f8" firstAttribute="top" secondItem="bjY-8G-bAF" secondAttribute="top" constant="10" id="evs-Th-2Nq"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oGD-Xs-V7Z" secondAttribute="trailing" constant="20" symbolic="YES" id="pYB-Wy-auY"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="oGD-Xs-V7Z" secondAttribute="bottom" constant="5" id="q2X-07-SmX"/>
+                                                <constraint firstItem="koJ-Fo-QUd" firstAttribute="top" secondItem="bjY-8G-bAF" secondAttribute="top" constant="-17" id="vNq-JM-uII"/>
+                                                <constraint firstItem="oGD-Xs-V7Z" firstAttribute="leading" secondItem="bjY-8G-bAF" secondAttribute="leading" constant="54" id="wTX-7A-jBJ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
                         <connections>
-                            <outlet property="dataSource" destination="ET8-Sk-iZf" id="iDR-hh-WJP"/>
+                            <outlet property="dataSource" destination="ET8-Sk-iZf" id="7Cl-e0-hyF"/>
                             <outlet property="delegate" destination="ET8-Sk-iZf" id="vKE-et-xHb"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="pickerView" destination="koJ-Fo-QUd" id="Ck3-ws-UVv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vQ2-Hg-Uaf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -649,6 +691,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="language" width="512" height="512"/>
         <image name="like50" width="37.5" height="37.5"/>
         <image name="menu24x16" width="24" height="16"/>
         <image name="nowPlaying" width="512" height="512"/>
@@ -660,6 +703,6 @@
         <image name="vote50" width="37.5" height="37.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2KA-sB-Gpt"/>
+        <segue reference="G4t-us-wS9"/>
     </inferredMetricsTieBreakers>
 </document>

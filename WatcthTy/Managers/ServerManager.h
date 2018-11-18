@@ -12,7 +12,7 @@
 
 + (ServerManager *) sharedManager;
 
-- (void) getMoviesWithURL:(NSString*)urlStr OnSuccess:(void(^)(NSArray* movies)) success
-                onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
+- (void) getMoviesWithURL:(NSString *)urlStr OnSuccess:(void(^)(NSArray *movies)) success
+                onFailure:(void(^)(NSError *error, NSInteger statusCode)) failure;
 
 @end

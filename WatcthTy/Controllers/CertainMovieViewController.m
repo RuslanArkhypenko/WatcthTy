@@ -20,7 +20,7 @@
     
     self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background"]];
     
-    Movie* movie = [self.certainMovie firstObject];
+    Movie *movie = [self.certainMovie firstObject];
 
     self.posterImageView.image = movie.posterImage;
 
@@ -30,7 +30,7 @@
         self.adultImageView.image = [UIImage imageNamed:@"18plus"];
     }
     
-    UILabel* titleLabel = [[UILabel alloc] init];
+    UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.text = [NSString stringWithFormat:@"%@", movie.title];
     titleLabel.numberOfLines = 0;
     titleLabel.textColor = [UIColor whiteColor];
