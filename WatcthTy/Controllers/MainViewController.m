@@ -177,13 +177,13 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
 
 #pragma mark - SWRevealViewControllerDelegate
 
-- (void)revealController:(SWRevealViewController *)revealController willMoveToPosition:(FrontViewPosition)position {
+- (void)revealControllerPanGestureBegan:(SWRevealViewController *)revealController {
     
     [self.searchBar resignFirstResponder];
 }
 
 - (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position {
-    
+
     if (position == FrontViewPositionLeft) {
         [self.searchBar becomeFirstResponder];
         [self.searchBar setShowsCancelButton:YES animated:YES];
