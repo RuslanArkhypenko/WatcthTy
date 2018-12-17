@@ -57,11 +57,7 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
     self.movieArray = [NSMutableArray array];
     [self configureMenuItem];
     [self.watchtyButton addTarget:self action:@selector(watchtyAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.backgroundColor = [UIColor clearColor];
-    [self.refreshControl addTarget:self action:@selector(refreshAction:) forControlEvents:UIControlEventValueChanged];
-    [self.collectionView addSubview:self.refreshControl];
+
     self.page = 1;
 
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -135,7 +131,7 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
     if (indexPath.row  == self.movieArray.count - 1) {
         
         NSString *requestStr = [NSString stringWithFormat:@"%@&page=%i", self.urlString, self.page];
-        [self getDataFromServerFromServer:requestStr];
+        [self getDataFromServer:requestStr];
     }
 }
 
@@ -172,7 +168,7 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
     NSString *escapedString = [searchText stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
     NSString *searchString = [NSString stringWithFormat:@"%@&language=%@&query=%@", searchURLStr, self.pickedLanguage, escapedString];
     self.urlString = [searchString stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    [self getDataFromServerFromServer:self.urlString];
+    [self getDataFromServer:self.urlString];
 }
 
 #pragma mark - SWRevealViewControllerDelegate
@@ -205,7 +201,7 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
 
     self.page = 1;
     [self.movieArray removeAllObjects];
-    [self getDataFromServerFromServer:self.urlString];
+    [self getDataFromServer:self.urlString];
     [self.refreshControl endRefreshing];
 }
 
@@ -251,7 +247,7 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
 
 #pragma mark - API
 
-- (void)getDataFromServerFromServer:(NSString *)urlStr {
+- (void)getDataFromServer:(NSString *)urlStr {
     
     [[ServerManager sharedManager] getMoviesWithURL:urlStr OnSuccess:^(NSArray *movies) {
         
@@ -283,25 +279,29 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
         case MovieCategoryNowPlaying: {
             [self.watchtyButton setTitle:@"Now Playing" forState:UIControlStateNormal];
             self.urlString = [NSString stringWithFormat:@"%@&language=%@", nowPlayingURLStr, self.pickedLanguage];
-            [self getDataFromServerFromServer:self.urlString];
+            [self getDataFromServer:self.urlString];
+            [self setRefreshCntrl];
             break;}
             
         case MovieCategoryPopular: {
             [self.watchtyButton setTitle:@"Popular" forState:UIControlStateNormal];
             self.urlString = [NSString stringWithFormat:@"%@&language=%@", popularURLStr, self.pickedLanguage];
-            [self getDataFromServerFromServer:self.urlString];
+            [self getDataFromServer:self.urlString];
+            [self setRefreshCntrl];
             break;}
             
         case MovieCategoryTopRated: {
             [self.watchtyButton setTitle:@"Top Rated" forState:UIControlStateNormal];
             self.urlString = [NSString stringWithFormat:@"%@&language=%@", topRatedURLStr, self.pickedLanguage];
-            [self getDataFromServerFromServer:self.urlString];
+            [self getDataFromServer:self.urlString];
+            [self setRefreshCntrl];
             break;}
             
         case MovieCategoryUpcoming: {
             [self.watchtyButton setTitle:@"Upcoming" forState:UIControlStateNormal];
             self.urlString = [NSString stringWithFormat:@"%@&language=%@", upcomingURLStr, self.pickedLanguage];
-            [self getDataFromServerFromServer:self.urlString];
+            [self getDataFromServer:self.urlString];
+            [self setRefreshCntrl];
             break;}
             
         case MovieCategorySearch: {
@@ -327,6 +327,14 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
     self.searchBar.keyboardAppearance = UIKeyboardAppearanceDark;
     [wrapView addSubview:self.searchBar];
     self.navigationItem.titleView = wrapView;
+}
+
+- (void)setRefreshCntrl {
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor clearColor];
+    [self.refreshControl addTarget:self action:@selector(refreshAction:) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView addSubview:self.refreshControl];
 }
 
 @end
