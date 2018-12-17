@@ -8,4 +8,6 @@ What you can find in the application:
 - see information about popular films;
 - check which movies are in top;
 - find out what movies will be released soon;
-- using the search to find your favorite movie.
+- using the search to find your favorite movie;
+- English, Russian and Deutsch languages support;
+- internet reachability checking.
