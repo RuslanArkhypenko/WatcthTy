@@ -16,6 +16,7 @@
 #import "Reachability.h"
 #import "NoConnectionView.h"
 #import "MenuTableViewController.h"
+#import "CustomFooterView.h"
 
 typedef enum {
     MovieCategoryNowPlaying,
@@ -26,7 +27,7 @@ typedef enum {
     
 } MovieCategory;
 
-@interface MainViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, SWRevealViewControllerDelegate>
+@interface MainViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UICollectionViewDelegateFlowLayout, SWRevealViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *menuItem;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -39,6 +40,8 @@ typedef enum {
 @property (strong, nonatomic) NSString *urlString;
 @property (strong, nonatomic) Reachability *internetReachability;
 @property (strong, nonatomic) NSString *pickedLanguage;
+@property (strong, nonatomic) CustomFooterView* footerView;
+@property (assign, nonatomic) BOOL isLoading;
 
 @end
 
@@ -64,6 +67,8 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
                                              selector:@selector(dataLanguageNotification:)
                                                  name:DataLanguageDidChangedNotification
                                                object:nil];
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:@"CustomFooterView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"RefreshFooterView"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -105,6 +110,7 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
     cell.titleLabel.text = [NSString stringWithFormat:@"%@", movie.title];
     cell.voteCountLabel.text = [NSString stringWithFormat:@"%i", (int)movie.voteCount];
     cell.voteAverageLabel.text = [NSString stringWithFormat:@"%.1f", movie.voteAverage];
+    cell.posterImageView.image = nil;
         
     NSURLRequest* posterPathRequest = [NSURLRequest requestWithURL:movie.posterPath];
         
@@ -113,25 +119,25 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
     placeholderImage:nil
     success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
     
-        cell.posterImageView.image = image;
         movie.posterImage = image;
+        cell.posterImageView.image = image;
     }
     failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         NSLog(@"error = %@", [error localizedDescription]);
              
     }];
-        
+    
     return cell;
 }
 
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     if (indexPath.row  == self.movieArray.count - 1) {
         
-        NSString *requestStr = [NSString stringWithFormat:@"%@&page=%i", self.urlString, self.page];
-        [self getDataFromServer:requestStr];
+        NSString *urlString = [NSString stringWithFormat:@"%@&page=%i", self.urlString, self.page];
+        [self getDataFromServer:urlString];
     }
 }
 
@@ -139,6 +145,77 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
     
     [self.searchBar resignFirstResponder];
     [self.searchBar setShowsCancelButton:NO animated:YES];
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+    
+    if (self.isLoading) {
+        return CGSizeZero;
+    }
+    
+    return CGSizeMake(collectionView.bounds.size.width, 55);
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    
+    if (kind == UICollectionElementKindSectionFooter) {
+        
+        CustomFooterView *customFooterView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"RefreshFooterView" forIndexPath:indexPath];
+        self.footerView = customFooterView;
+        self.footerView.backgroundColor = [UIColor clearColor];
+        return customFooterView;
+    } else {
+        return nil;
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
+    
+    if (elementKind == UICollectionElementKindSectionFooter) {
+        [self.footerView prepareInitialAnimation];
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingSupplementaryView:(UICollectionReusableView *)view forElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
+
+    if (elementKind == UICollectionElementKindSectionFooter) {
+        [self.footerView stopAnimate];
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    CGFloat threshold = 100.0;
+    CGFloat contentOffset = scrollView.contentOffset.y;
+    CGFloat contentHeight = scrollView.contentSize.height;
+    CGFloat diffHeight = contentHeight - contentOffset;
+    CGFloat frameHeight = scrollView.bounds.size.height;
+    CGFloat triggerThreshold = ((diffHeight - frameHeight))/(threshold);
+    triggerThreshold =  MIN(triggerThreshold, 0.0);
+    CGFloat pullRatio  = MIN(fabs(triggerThreshold), 1.0);
+    [self.footerView setTransform:CGAffineTransformIdentity scaleFactor:pullRatio];
+    if (pullRatio >= 1) {
+        [self.footerView animateFinal];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+
+    CGFloat contentOffset = scrollView.contentOffset.y;
+    CGFloat contentHeight = scrollView.contentSize.height;
+    CGFloat diffHeight = contentHeight - contentOffset;
+    CGFloat frameHeight = scrollView.bounds.size.height;
+    CGFloat pullHeight  = fabs(diffHeight - frameHeight);
+    if (pullHeight == 0.0) {
+        if (self.footerView.isAnimatingFinal) {
+            
+            self.isLoading = true;
+            [self.footerView startAnimate];
+            NSString *urlString = [NSString stringWithFormat:@"%@&page=%i", self.urlString, self.page];
+            [self getDataFromServer:urlString];
+            self.isLoading = false;
+        }
+    }
 }
 
 #pragma mark - UISearchBarDelegate
@@ -161,7 +238,7 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    
+
     self.page = 1;
     [self.movieArray removeAllObjects];
     [self.collectionView reloadData];
@@ -228,6 +305,13 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
         NSLog(@"Reachable");
         self.navigationItem.titleView = self.watchtyButton;
         [self setChoosenCategory];
+        
+        if (self.movieArray.count < 1 && self.category != MovieCategorySearch) {
+            
+            NSString *urlString = [NSString stringWithFormat:@"%@&page=%i", self.urlString, self.page];
+            [self getDataFromServer:urlString];
+        }
+        
     } else {
         NSLog(@"Not reachable");
         NoConnectionView *noConnectionView = [[NoConnectionView alloc] initWithFrame:CGRectMake(0, 0, 180, 36)];
@@ -243,6 +327,9 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
     [self.movieArray removeAllObjects];
     [self.collectionView reloadData];
     [self setChoosenCategory];
+    self.page = 1;
+    NSString *urlString = [NSString stringWithFormat:@"%@&page=%i", self.urlString, self.page];
+    [self getDataFromServer:urlString];
 }
 
 #pragma mark - API
@@ -270,37 +357,31 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
 }
 
 - (void)setChoosenCategory {
-
-    self.page = 1;
-    
+  
     self.pickedLanguage = [[NSUserDefaults standardUserDefaults] stringForKey:@"PickedLanguageKeyValue"];
     
     switch (self.category) {
         case MovieCategoryNowPlaying: {
             [self.watchtyButton setTitle:@"Now Playing" forState:UIControlStateNormal];
             self.urlString = [NSString stringWithFormat:@"%@&language=%@", nowPlayingURLStr, self.pickedLanguage];
-            [self getDataFromServer:self.urlString];
             [self setRefreshCntrl];
             break;}
             
         case MovieCategoryPopular: {
             [self.watchtyButton setTitle:@"Popular" forState:UIControlStateNormal];
             self.urlString = [NSString stringWithFormat:@"%@&language=%@", popularURLStr, self.pickedLanguage];
-            [self getDataFromServer:self.urlString];
             [self setRefreshCntrl];
             break;}
             
         case MovieCategoryTopRated: {
             [self.watchtyButton setTitle:@"Top Rated" forState:UIControlStateNormal];
             self.urlString = [NSString stringWithFormat:@"%@&language=%@", topRatedURLStr, self.pickedLanguage];
-            [self getDataFromServer:self.urlString];
             [self setRefreshCntrl];
             break;}
             
         case MovieCategoryUpcoming: {
             [self.watchtyButton setTitle:@"Upcoming" forState:UIControlStateNormal];
             self.urlString = [NSString stringWithFormat:@"%@&language=%@", upcomingURLStr, self.pickedLanguage];
-            [self getDataFromServer:self.urlString];
             [self setRefreshCntrl];
             break;}
             
