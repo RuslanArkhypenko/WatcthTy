@@ -321,9 +321,7 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
 }
 
 - (void)dataLanguageNotification:(NSNotification *) notification {
-    
-    NSLog(@"receiveTestNotification userInfo = %@", notification.userInfo);
-    
+        
     self.pickedLanguage = [notification.userInfo objectForKey:@"DataLanguageUserInfoKey"];
     [self.movieArray removeAllObjects];
     [self.collectionView reloadData];

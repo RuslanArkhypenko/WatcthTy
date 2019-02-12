@@ -33,7 +33,6 @@
     self.currentTransform = inTransform;
 }
 
-////reset the animation
 - (void)prepareInitialAnimation {
     
     self.isAnimatingFinal = false;
@@ -51,7 +50,6 @@
     [self.refreshControlIndicator stopAnimating];
 }
 
-//final animation to display loading
 - (void)animateFinal {
     if (self.isAnimatingFinal) {
         return;

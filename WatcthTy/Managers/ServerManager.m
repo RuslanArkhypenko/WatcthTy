@@ -29,10 +29,7 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       // NSLog(@"JSON: %@", responseObject);
-        
-        NSLog(@"SERVER ::::::::::%@", urlStr);
-        
+                
         NSArray *JSONArray = [responseObject objectForKey:@"results"];
         NSMutableArray *objectsArray = [NSMutableArray array];
         
