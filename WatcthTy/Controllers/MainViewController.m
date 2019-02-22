@@ -111,22 +111,25 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
     cell.titleLabel.text = [NSString stringWithFormat:@"%@", movie.title];
     cell.voteCountLabel.text = [NSString stringWithFormat:@"%i", (int)movie.voteCount];
     cell.voteAverageLabel.text = [NSString stringWithFormat:@"%.1f", movie.voteAverage];
-    cell.posterImageView.image = nil;
+   // cell.posterImageView.image = nil;
         
     NSURLRequest* posterPathRequest = [NSURLRequest requestWithURL:movie.posterPath];
-        
-    [cell.posterImageView
-    setImageWithURLRequest:posterPathRequest
-    placeholderImage:nil
-    success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
     
-        movie.posterImage = image;
-        cell.posterImageView.image = image;
-    }
-    failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        NSLog(@"error = %@", [error localizedDescription]);
+    if (movie.posterImage) {
+        cell.posterImageView.image = movie.posterImage;
+    } else {
+        [cell.posterImageView
+         setImageWithURLRequest:posterPathRequest
+         placeholderImage:nil
+         success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+             movie.posterImage = image;
+             cell.posterImageView.image = image;
+         }
+         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+             NSLog(@"error = %@", [error localizedDescription]);
              
-    }];
+         }];
+    }
     
     return cell;
 }
