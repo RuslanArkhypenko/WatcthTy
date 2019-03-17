@@ -11,7 +11,6 @@
 
 @interface Movie : NSObject
 
-@property (assign, nonatomic) BOOL adult;
 @property (strong, nonatomic) NSURL *backdropPath;
 @property (strong, nonatomic) NSString *originalLanguage;
 @property (strong, nonatomic) NSString *originalTitle;

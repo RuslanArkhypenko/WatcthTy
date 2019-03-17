@@ -15,7 +15,6 @@
     self = [super init];
     if (self) {
         
-        self.adult = [responseObject objectForKey:@"adult"];
         self.backdropPath = [NSURL URLWithString:[NSString stringWithFormat:@"https://image.tmdb.org/t/p/w500%@", [responseObject objectForKey:@"backdrop_path"]]];
         self.originalLanguage = [responseObject objectForKey:@"original_language"];
         self.originalTitle = [responseObject objectForKey:@"original_title"];

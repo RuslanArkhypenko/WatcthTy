@@ -204,20 +204,11 @@
                                                         <constraint firstAttribute="width" secondItem="Cft-Ri-1uP" secondAttribute="height" multiplier="2:3" id="TWI-8j-tiB"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SJi-Qm-4lS">
-                                                    <rect key="frame" x="268.5" y="16" width="45" height="45"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="45" id="fit-5F-x3m"/>
-                                                        <constraint firstAttribute="height" constant="45" id="oHc-PI-ELf"/>
-                                                    </constraints>
-                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="SJi-Qm-4lS" firstAttribute="leading" secondItem="Cft-Ri-1uP" secondAttribute="trailing" constant="8" symbolic="YES" id="AgO-xb-v4j"/>
                                                 <constraint firstItem="Cft-Ri-1uP" firstAttribute="top" secondItem="AdD-PE-daY" secondAttribute="topMargin" constant="5" id="Xlj-w2-uLx"/>
                                                 <constraint firstItem="Cft-Ri-1uP" firstAttribute="centerY" secondItem="AdD-PE-daY" secondAttribute="centerY" id="ZMJ-Y0-eEn"/>
-                                                <constraint firstItem="Cft-Ri-1uP" firstAttribute="top" secondItem="SJi-Qm-4lS" secondAttribute="top" id="pWm-dv-CsZ"/>
                                                 <constraint firstItem="Cft-Ri-1uP" firstAttribute="centerX" secondItem="AdD-PE-daY" secondAttribute="centerX" id="zev-ug-n2a"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -387,7 +378,6 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="adultImageView" destination="SJi-Qm-4lS" id="TLz-qK-tCo"/>
                         <outlet property="originalLanguageLabel" destination="t8q-DV-hkL" id="4l7-Vx-mgL"/>
                         <outlet property="overviewLabel" destination="JQb-CV-Z4w" id="tW1-3u-KnR"/>
                         <outlet property="posterImageView" destination="Cft-Ri-1uP" id="dmf-S9-Wx5"/>
@@ -677,7 +667,7 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.80000000000000004" green="0.85098039215686272" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="tintColor" red="0.0" green="0.88235294117647056" blue="0.46274509803921571" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.0" green="0.88235294119999996" blue="0.46274509800000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.035294117647058823" green="0.070588235294117646" blue="0.11372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -703,6 +693,6 @@
         <image name="vote50" width="37.5" height="37.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="G4t-us-wS9"/>
+        <segue reference="5J1-DH-wra"/>
     </inferredMetricsTieBreakers>
 </document>

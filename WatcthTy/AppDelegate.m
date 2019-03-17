@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <UserNotifications/UserNotifications.h>
 
 @interface AppDelegate ()
 
@@ -17,6 +18,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionSound) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        if (!granted) {
+            NSLog(@"Something went wrong");
+        }
+    }];
     return YES;
 }
 

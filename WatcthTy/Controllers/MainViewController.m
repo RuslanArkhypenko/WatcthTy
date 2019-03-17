@@ -111,7 +111,7 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
     cell.titleLabel.text = [NSString stringWithFormat:@"%@", movie.title];
     cell.voteCountLabel.text = [NSString stringWithFormat:@"%i", (int)movie.voteCount];
     cell.voteAverageLabel.text = [NSString stringWithFormat:@"%.1f", movie.voteAverage];
-   // cell.posterImageView.image = nil;
+    cell.posterImageView.image = nil;
         
     NSURLRequest* posterPathRequest = [NSURLRequest requestWithURL:movie.posterPath];
     
@@ -306,7 +306,6 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
 - (void)logReachability:(Reachability *)reachability {
 
     if (reachability.isReachable) {
-        NSLog(@"Reachable");
         self.navigationItem.titleView = self.watchtyButton;
         [self setChoosenCategory];
         
@@ -317,7 +316,6 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
         }
         
     } else {
-        NSLog(@"Not reachable");
         NoConnectionView *noConnectionView = [[NoConnectionView alloc] initWithFrame:CGRectMake(0, 0, 180, 36)];
         self.navigationItem.titleView = noConnectionView;
     }
