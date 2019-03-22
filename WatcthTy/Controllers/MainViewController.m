@@ -60,7 +60,6 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
     self.movieArray = [NSMutableArray array];
     [self configureMenuItem];
     [self.watchtyButton addTarget:self action:@selector(watchtyAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self setRefreshCntrl];
 
     self.page = 1;
 
@@ -364,21 +363,25 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
         case MovieCategoryNowPlaying: {
             [self.watchtyButton setTitle:@"Now Playing" forState:UIControlStateNormal];
             self.urlString = [NSString stringWithFormat:@"%@&language=%@", nowPlayingURLStr, self.pickedLanguage];
+            [self setRefreshCntrl];
             break;}
             
         case MovieCategoryPopular: {
             [self.watchtyButton setTitle:@"Popular" forState:UIControlStateNormal];
             self.urlString = [NSString stringWithFormat:@"%@&language=%@", popularURLStr, self.pickedLanguage];
+            [self setRefreshCntrl];
             break;}
             
         case MovieCategoryTopRated: {
             [self.watchtyButton setTitle:@"Top Rated" forState:UIControlStateNormal];
             self.urlString = [NSString stringWithFormat:@"%@&language=%@", topRatedURLStr, self.pickedLanguage];
+            [self setRefreshCntrl];
             break;}
             
         case MovieCategoryUpcoming: {
             [self.watchtyButton setTitle:@"Upcoming" forState:UIControlStateNormal];
             self.urlString = [NSString stringWithFormat:@"%@&language=%@", upcomingURLStr, self.pickedLanguage];
+            [self setRefreshCntrl];
             break;}
             
         case MovieCategorySearch: {
