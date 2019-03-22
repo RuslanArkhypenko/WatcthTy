@@ -282,6 +282,7 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
 
     self.page = 1;
     [self.movieArray removeAllObjects];
+    [self.collectionView reloadData];
     [self getDataFromServer:self.urlString];
     [self.refreshControl endRefreshing];
 }

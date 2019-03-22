@@ -10,6 +10,7 @@
 		15590B752CD247F60BE45222 /* libPods-WatcthTyUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DA8CB35F9D86603E45FA5D8 /* libPods-WatcthTyUITests.a */; };
 		52234BD1235F029D00937DAE /* libPods-WatcthTyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6178255122BCCBD5DBC91668 /* libPods-WatcthTyTests.a */; };
 		9A983D3858D7CE1F587E6D08 /* libPods-WatcthTy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B67DDE097FCE11ACF66CCB8C /* libPods-WatcthTy.a */; };
+		B11DB18B22444791000B1DB8 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B11DB18A22444791000B1DB8 /* CoreDataManager.m */; };
 		B122602E212D5E4A005E4DD8 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B122602C212D5E4A005E4DD8 /* SWRevealViewController.m */; };
 		B1226031212D70A4005E4DD8 /* MenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B1226030212D70A4005E4DD8 /* MenuTableViewController.m */; };
 		B17E2B09211DED5E00463600 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B17E2B08211DED5E00463600 /* AppDelegate.m */; };
@@ -24,6 +25,9 @@
 		B17E2B41211DFD4F00463600 /* ServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B17E2B40211DFD4F00463600 /* ServerManager.m */; };
 		B17E2B44211E01CE00463600 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = B17E2B43211E01CE00463600 /* Movie.m */; };
 		B17E2B4F212080EF00463600 /* CertainMovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B17E2B4E212080EF00463600 /* CertainMovieViewController.m */; };
+		B17E9CB9224456480036ABC7 /* MovieModel+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B17E9CB7224456480036ABC7 /* MovieModel+CoreDataClass.m */; };
+		B17E9CBA224456480036ABC7 /* MovieModel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B17E9CB8224456480036ABC7 /* MovieModel+CoreDataProperties.m */; };
+		B1CED1BF224454FC00A74F48 /* WatchTy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B1CED1BD224454FC00A74F48 /* WatchTy.xcdatamodeld */; };
 		B1DC5BD422036FF40087B463 /* CustomFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DC5BD222036FF40087B463 /* CustomFooterView.m */; };
 		B1DC5BD522036FF50087B463 /* CustomFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1DC5BD322036FF40087B463 /* CustomFooterView.xib */; };
 		B1E806FB2194A65C00AD2F91 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E806FA2194A65C00AD2F91 /* Reachability.m */; };
@@ -55,6 +59,8 @@
 		6178255122BCCBD5DBC91668 /* libPods-WatcthTyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WatcthTyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		762DC3CD6C5EA41B6CFAE7B2 /* Pods-WatcthTyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatcthTyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WatcthTyUITests/Pods-WatcthTyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		91F93F755869346C310E66BC /* Pods-WatcthTy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatcthTy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WatcthTy/Pods-WatcthTy.debug.xcconfig"; sourceTree = "<group>"; };
+		B11DB18922444791000B1DB8 /* CoreDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
+		B11DB18A22444791000B1DB8 /* CoreDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
 		B122602C212D5E4A005E4DD8 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		B122602D212D5E4A005E4DD8 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		B122602F212D70A4005E4DD8 /* MenuTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenuTableViewController.h; sourceTree = "<group>"; };
@@ -83,6 +89,11 @@
 		B17E2B43211E01CE00463600 /* Movie.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
 		B17E2B4D212080EF00463600 /* CertainMovieViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertainMovieViewController.h; sourceTree = "<group>"; };
 		B17E2B4E212080EF00463600 /* CertainMovieViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertainMovieViewController.m; sourceTree = "<group>"; };
+		B17E9CB5224456480036ABC7 /* MovieModel+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MovieModel+CoreDataProperties.h"; sourceTree = "<group>"; };
+		B17E9CB6224456480036ABC7 /* MovieModel+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MovieModel+CoreDataClass.h"; sourceTree = "<group>"; };
+		B17E9CB7224456480036ABC7 /* MovieModel+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MovieModel+CoreDataClass.m"; sourceTree = "<group>"; };
+		B17E9CB8224456480036ABC7 /* MovieModel+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MovieModel+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B1CED1BE224454FC00A74F48 /* WatchTy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WatchTy.xcdatamodel; sourceTree = "<group>"; };
 		B1DC5BD122036FF40087B463 /* CustomFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomFooterView.h; sourceTree = "<group>"; };
 		B1DC5BD222036FF40087B463 /* CustomFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomFooterView.m; sourceTree = "<group>"; };
 		B1DC5BD322036FF40087B463 /* CustomFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomFooterView.xib; sourceTree = "<group>"; };
@@ -186,6 +197,8 @@
 				B17E2B492120808C00463600 /* Controllers */,
 				B17E2B4C212080B800463600 /* Managers */,
 				B17E2B4B212080AC00463600 /* Model */,
+				B1CED1C62244556000A74F48 /* CoreDataModel */,
+				B1CED1BD224454FC00A74F48 /* WatchTy.xcdatamodeld */,
 			);
 			path = WatcthTy;
 			sourceTree = "<group>";
@@ -246,8 +259,21 @@
 			children = (
 				B17E2B3F211DFD4F00463600 /* ServerManager.h */,
 				B17E2B40211DFD4F00463600 /* ServerManager.m */,
+				B11DB18922444791000B1DB8 /* CoreDataManager.h */,
+				B11DB18A22444791000B1DB8 /* CoreDataManager.m */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		B1CED1C62244556000A74F48 /* CoreDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				B17E9CB5224456480036ABC7 /* MovieModel+CoreDataProperties.h */,
+				B17E9CB6224456480036ABC7 /* MovieModel+CoreDataClass.h */,
+				B17E9CB7224456480036ABC7 /* MovieModel+CoreDataClass.m */,
+				B17E9CB8224456480036ABC7 /* MovieModel+CoreDataProperties.m */,
+			);
+			name = CoreDataModel;
 			sourceTree = "<group>";
 		};
 		B1DC5BD6220370010087B463 /* CustomFooterView */ = {
@@ -472,10 +498,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B17E2B44211E01CE00463600 /* Movie.m in Sources */,
+				B11DB18B22444791000B1DB8 /* CoreDataManager.m in Sources */,
 				B17E2B41211DFD4F00463600 /* ServerManager.m in Sources */,
 				B1DC5BD422036FF40087B463 /* CustomFooterView.m in Sources */,
+				B1CED1BF224454FC00A74F48 /* WatchTy.xcdatamodeld in Sources */,
 				B17E2B17211DED5F00463600 /* main.m in Sources */,
+				B17E9CBA224456480036ABC7 /* MovieModel+CoreDataProperties.m in Sources */,
 				B122602E212D5E4A005E4DD8 /* SWRevealViewController.m in Sources */,
+				B17E9CB9224456480036ABC7 /* MovieModel+CoreDataClass.m in Sources */,
 				B1E806FB2194A65C00AD2F91 /* Reachability.m in Sources */,
 				B17E2B3B211DF9CB00463600 /* MainViewController.m in Sources */,
 				B1E807052194D88A00AD2F91 /* NoConnectionView.m in Sources */,
@@ -654,6 +684,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6Y53L9635B;
+				ENABLE_BITCODE = NO;
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = WatcthTy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -672,6 +704,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6Y53L9635B;
+				ENABLE_BITCODE = NO;
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = WatcthTy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -797,6 +831,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B1CED1BD224454FC00A74F48 /* WatchTy.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B1CED1BE224454FC00A74F48 /* WatchTy.xcdatamodel */,
+			);
+			currentVersion = B1CED1BE224454FC00A74F48 /* WatchTy.xcdatamodel */;
+			path = WatchTy.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B17E2AFC211DED5E00463600 /* Project object */;
 }
