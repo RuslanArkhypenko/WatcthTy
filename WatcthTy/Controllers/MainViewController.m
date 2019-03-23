@@ -24,7 +24,6 @@ typedef enum {
     MovieCategoryTopRated,
     MovieCategoryUpcoming,
     MovieCategorySearch
-    
 } MovieCategory;
 
 @interface MainViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UICollectionViewDelegateFlowLayout, SWRevealViewControllerDelegate>
@@ -59,6 +58,7 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Background"]];
     self.movieArray = [NSMutableArray array];
     [self configureMenuItem];
+    [self setRefreshCntrl];
     [self.watchtyButton addTarget:self action:@selector(watchtyAction:) forControlEvents:UIControlEventTouchUpInside];
 
     self.page = 1;
@@ -281,6 +281,7 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
 
     self.page = 1;
     [self.movieArray removeAllObjects];
+    [self.collectionView reloadData];
     [self getDataFromServer:self.urlString];
     [self.refreshControl endRefreshing];
 }
@@ -363,25 +364,21 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
         case MovieCategoryNowPlaying: {
             [self.watchtyButton setTitle:@"Now Playing" forState:UIControlStateNormal];
             self.urlString = [NSString stringWithFormat:@"%@&language=%@", nowPlayingURLStr, self.pickedLanguage];
-            [self setRefreshCntrl];
             break;}
             
         case MovieCategoryPopular: {
             [self.watchtyButton setTitle:@"Popular" forState:UIControlStateNormal];
             self.urlString = [NSString stringWithFormat:@"%@&language=%@", popularURLStr, self.pickedLanguage];
-            [self setRefreshCntrl];
             break;}
             
         case MovieCategoryTopRated: {
             [self.watchtyButton setTitle:@"Top Rated" forState:UIControlStateNormal];
             self.urlString = [NSString stringWithFormat:@"%@&language=%@", topRatedURLStr, self.pickedLanguage];
-            [self setRefreshCntrl];
             break;}
             
         case MovieCategoryUpcoming: {
             [self.watchtyButton setTitle:@"Upcoming" forState:UIControlStateNormal];
             self.urlString = [NSString stringWithFormat:@"%@&language=%@", upcomingURLStr, self.pickedLanguage];
-            [self setRefreshCntrl];
             break;}
             
         case MovieCategorySearch: {
