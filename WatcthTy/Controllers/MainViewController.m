@@ -58,7 +58,9 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Background"]];
     self.movieArray = [NSMutableArray array];
     [self configureMenuItem];
-    [self setRefreshCntrl];
+    if (self.category != MovieCategorySearch) {
+        [self setRefreshCntrl];
+    }
     [self.watchtyButton addTarget:self action:@selector(watchtyAction:) forControlEvents:UIControlEventTouchUpInside];
 
     self.page = 1;
