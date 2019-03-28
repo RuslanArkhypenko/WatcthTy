@@ -58,9 +58,7 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Background"]];
     self.movieArray = [NSMutableArray array];
     [self configureMenuItem];
-    if (self.category != MovieCategorySearch) {
-        [self setRefreshCntrl];
-    }
+    [self setRefreshCntrl];
     [self.watchtyButton addTarget:self action:@selector(watchtyAction:) forControlEvents:UIControlEventTouchUpInside];
 
     self.page = 1;
@@ -139,7 +137,7 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    if (indexPath.row  == self.movieArray.count - 1) {
+    if (indexPath.row == self.movieArray.count - 1) {
         
         NSString *urlString = [NSString stringWithFormat:@"%@&page=%i", self.urlString, self.page];
         [self getDataFromServer:urlString];
@@ -384,7 +382,7 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
             break;}
             
         case MovieCategorySearch: {
-             [self setSearchBar];
+            [self setSearchBar];
             break;}
     }
 }
@@ -400,9 +398,9 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
 - (void)setSearchBar {
     
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 1.5 * 44, 44)];
-    
+
     UIView *wrapView = [[UIView alloc] initWithFrame:self.searchBar.frame];
-    self.searchBar.delegate = self;
+   self.searchBar.delegate = self;
     self.searchBar.keyboardAppearance = UIKeyboardAppearanceDark;
     [wrapView addSubview:self.searchBar];
     self.navigationItem.titleView = wrapView;
@@ -410,10 +408,12 @@ NSString *upcomingURLStr = @"https://api.themoviedb.org/3/movie/upcoming?api_key
 
 - (void)setRefreshCntrl {
     
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.backgroundColor = [UIColor clearColor];
-    [self.refreshControl addTarget:self action:@selector(refreshAction:) forControlEvents:UIControlEventValueChanged];
-    [self.collectionView addSubview:self.refreshControl];
+    if (self.category != MovieCategorySearch) {
+        self.refreshControl = [[UIRefreshControl alloc] init];
+        self.refreshControl.backgroundColor = [UIColor clearColor];
+        [self.refreshControl addTarget:self action:@selector(refreshAction:) forControlEvents:UIControlEventValueChanged];
+        [self.collectionView addSubview:self.refreshControl];
+    }
 }
 
 @end
